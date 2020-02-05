@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .clock{
+        border:1px solid black;
+        height:200px;
+        width: 200px;
+        border-radius: 100%;
+        margin-left:30%;
+    }
+    .clock-face{
+        position: relative;
+        border:2px solid #554d4d;
+        border-radius: 100%;
+        height:180px;
+        width:180px;
+        top:9px;
+        left:9px;
+    }
+    .hand{
+        width:50%;
+        height:2px;
+        position: absolute;
+        top:50%;    
+        transform-origin: 100%;
+        transform:rotate(90deg);
+        transition: all 0.05s;
+    }
+    .second{
+        width:40%;
+        left:10%;
+        background-color:black;
+    }
+    .minute{
+        width:30%;
+        left:20%;
+        background-color:black;
+    }
+    .hour{
+        width:20%;
+        left:30%;
+        background-color:black;
+    }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand second"></div>
+            <div class="hand minute"></div>
+            <div class="hand hour"></div>
+        </div>
+    </div>
+</body>
+<script>
+        const secondPoint = document.querySelector('.second');
+        const minutePoint = document.querySelector('.minute');
+        const hourPoint = document.querySelector('.hour');
+        function setDate()
+        {
+            const now = new Date();
+            
+            const seconds = now.getSeconds();
+            const secondsDeg = (seconds * 6) + 90;
+            secondPoint.style.transform = `rotate(${secondsDeg}deg)`;
+            
+            const minutes = now.getMinutes();
+            const minutesDeg = (minutes * 6) + 90;
+            minutePoint.style.transform = `rotate(${minutesDeg}deg)`;
+            
+            const hours = now.getHours();
+            const hoursDeg = (hours*360/12 + ((minutes * 360/60)/12)) + 90;
+            hourPoint.style.transform = `rotate(${hoursDeg}deg)`;
+            console.log(hours);
+        }
+        setInterval(setDate,1000);
+        
+    </script>
+</html>
